@@ -3,7 +3,8 @@ n = int(input())
 l = [list(map(int, input().split())) for i in range(n)]
 
 # NOTE: 右記のように宣言すると参照渡しになり、それぞれの階、部屋への値の代入が行われてしまう
-#  a = [[[0]*10]*3]*4
+# a = [[[0]*10]*3]*4
+# ref: https://note.nkmk.me/python-list-initialize/
 b = [[[0]*10 for i in range(3)] for j in range(4)]
 
 for i in l:
