@@ -11,9 +11,9 @@ for i in l:
         print("F")
     elif (i[0]+i[1]) >= 80:
         print("A")
-    elif (i[0]+i[1]) >= 65 and (i[0]+i[1]) <80:
+    elif (i[0]+i[1]) >= 65 and (i[0]+i[1]) < 80:
         print("B")
-    elif ((i[0]+i[1]) >= 50 and (i[0]+i[1]) <65) or ((i[0]+i[1]) >= 30 and (i[0]+i[1]) < 50 and i[2] >= 50): 
+    elif ((i[0]+i[1]) >= 50 and (i[0]+i[1]) < 65) or ((i[0]+i[1]) >= 30 and (i[0]+i[1]) < 50 and i[2] >= 50):
         print("C")
     elif (i[0]+i[1]) >= 30 and (i[0]+i[1]) < 50:
         print("D")
