@@ -5,9 +5,11 @@ while True:
     if l == [0, 0]:
         break
     # NOTE: performance following by Python3, Time:00:79s Memory: 18424KB
+    # ref: http://judge.u-aizu.ac.jp/onlinejudge/review.jsp?rid=5199802#2
     print(len([i for i in list(combinations(range(1, l[0]+1), 3)) if sum(i) == l[1]]))
 
     # NOTE: performance following by Python3, Time:03:51s Memory: 5604KB
+    # ref: http://judge.u-aizu.ac.jp/onlinejudge/review.jsp?rid=5199791#2
     # r = []
     # n = l[0]
     # x = l[1]
