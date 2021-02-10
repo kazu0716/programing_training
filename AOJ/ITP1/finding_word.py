@@ -7,5 +7,5 @@ while True:
         break
     for s in txt.split():
         if s.lower() == w.lower():
-            ans +=1
+            ans += 1
 print(ans)

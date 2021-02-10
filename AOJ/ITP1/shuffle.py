@@ -6,7 +6,7 @@ while True:
     if s.isalpha() or s == "-":
         if cards != "":
             ans.append(cards)
-        if s == "-": 
+        if s == "-":
             break
         cards = s
     else:
@@ -14,4 +14,4 @@ while True:
         for _ in range(m):
             n = int(input())
             cards = cards[n:] + cards[0:n]
-print(*ans,sep="\n")
+print(*ans, sep="\n")
