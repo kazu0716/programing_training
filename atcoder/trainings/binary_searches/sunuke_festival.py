@@ -3,11 +3,11 @@ def search_a(_list, item):
 
     while high >= low:
         mid = (low + high) // 2
-        guess_1 = _list[mid - 1]
-        guess_2 = _list[mid]
+        guess_1 = _list[mid]
+        guess_2 = _list[mid+1]
 
         if guess_1 < item and item <= guess_2:
-            return mid - 1
+            return mid
         if guess_1 >= item:
             high = mid - 1
         else:
