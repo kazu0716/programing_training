@@ -1,7 +1,6 @@
 X, M = input(), int(input())
 
 d = max(list(map(int, list(X))))
-ans = 0
 
 
 def base10from(num, b):
@@ -13,11 +12,25 @@ def base10from(num, b):
     return n
 
 
-while True:
-    d += 1
-    m = base10from(X, d)
-    if m > M:
-        break
-    ans += 1
+def binary_search(x, m, _d):
+    if len(x) == 1:
+        if int(x) <= m:
+            return 1
+        else:
+            return 0
 
-print(ans)
+    low = _d
+    high = m + 1
+
+    while high - low > 1:
+        mid = (low + high) // 2
+        guess = base10from(x, mid)
+
+        if guess > m:
+            high = mid
+        else:
+            low = mid
+    return low - _d
+
+
+print(binary_search(X, M, d))
