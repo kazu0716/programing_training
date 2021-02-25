@@ -20,12 +20,12 @@ def dijkstra(s, n, adj):
 
 def main():
     V, E, r = map(int, input().split())
-    edges = [[] for _ in range(V)]
+    adj = [[] for _ in range(V)]
     for _ in range(E):
         s, t, d = map(int, input().split())
-        edges[s].append((t, d))
+        adj[s].append((t, d))
 
-    for d in dijkstra(r, V, edges):
+    for d in dijkstra(r, V, adj):
         if d == float("inf"):
             print("INF")
         else:
