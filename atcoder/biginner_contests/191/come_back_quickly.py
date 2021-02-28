@@ -1,6 +1,7 @@
 from heapq import heappop, heappush
+from sys import stdin
 
-INF = float("inf")
+INF = pow(10, 16)
 
 
 def dijkstra(s, n, adj):
@@ -19,32 +20,36 @@ def dijkstra(s, n, adj):
 
 
 def main():
-    N, M = map(int, input().split())
+    readline = stdin.readline
+    N, M = map(int, readline().split())
+
     range_n = range(N)
     adj = [[] for _ in range_n]
     ans, costs = [INF] * N, [[INF] * N for _ in range_n]
 
     for _ in range(M):
-        a, b, c = map(int, input().split())
+        a, b, c = map(int, readline().split())
         adj[a-1].append((b-1, c))
         if a == b:
-            ans[a-1] = c
+            ans[a-1] = min(ans[a-1], c)
 
     for s in range_n:
-        for d, cost in enumerate(dijkstra(s, N, adj)):
+        dist = dijkstra(s, N, adj)
+        for d, cost in enumerate(dist):
             if s != d:
-                costs[s][d] = min(costs[s][d], cost)
+                costs[s][d] = cost
 
     for s in range_n:
         for d in range_n:
-            if s != d:
-                ans[d] = min(ans[d], costs[s][d] + costs[d][s])
+            if s == d:
+                continue
+            ans[d] = min(ans[d], costs[s][d] + costs[d][s])
 
-    for a in ans:
+    for i, a in enumerate(ans):
         if a == INF:
-            print(-1)
-        else:
-            print(a)
+            a[i] = -1
+
+    print(*ans, sep="\n")
 
 
 if __name__ == '__main__':
