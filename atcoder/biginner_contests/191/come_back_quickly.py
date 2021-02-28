@@ -20,24 +20,25 @@ def dijkstra(s, n, adj):
 
 def main():
     N, M = map(int, input().split())
-    adj, ans, out = [[]for _ in range(
-        N)], [INF] * N, [[INF] * N for _ in range(N)]
+    range_n = range(N)
+    adj = [[] for _ in range_n]
+    ans, costs = [INF] * N, [[INF] * N for _ in range_n]
 
     for _ in range(M):
         a, b, c = map(int, input().split())
         adj[a-1].append((b-1, c))
-        if a-1 == b-1:
+        if a == b:
             ans[a-1] = c
 
-    for s in range(N):
-        for dst, cost in enumerate(dijkstra(s, N, adj)):
-            if s != dst:
-                out[s][dst] = min(out[s][dst], cost)
+    for s in range_n:
+        for d, cost in enumerate(dijkstra(s, N, adj)):
+            if s != d:
+                costs[s][d] = min(costs[s][d], cost)
 
-    for i, o in enumerate(out):
-        for j, cost in enumerate(o):
-            if cost != INF:
-                ans[i] = min(ans[i], cost + out[j][i])
+    for s in range_n:
+        for d in range_n:
+            if s != d:
+                ans[d] = min(ans[d], costs[s][d] + costs[d][s])
 
     for a in ans:
         if a == INF:
