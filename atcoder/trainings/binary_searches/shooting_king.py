@@ -13,27 +13,22 @@ def is_shooting(H, S, score, N):
     return True
 
 
-def main():
-    N = int(input())
-    H, S = [], []
+N = int(input())
+H, S = [], []
 
-    for _ in range(N):
-        h, s = map(int, input().split())
-        H.append(h)
-        S.append(s)
+for _ in range(N):
+    h, s = map(int, input().split())
+    H.append(h)
+    S.append(s)
 
-    low, high = 0, pow(10, 18)
+low, high = 0, pow(10, 18)
 
-    while high > low:
-        mid = (low + high) // 2
+while high > low:
+    mid = (low + high) // 2
 
-        if is_shooting(H, S, mid, N):
-            high = mid
-        else:
-            low = mid + 1
+    if is_shooting(H, S, mid, N):
+        high = mid
+    else:
+        low = mid + 1
 
-    print(low)
-
-
-if __name__ == '__main__':
-    main()
+print(low)
