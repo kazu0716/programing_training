@@ -1,18 +1,16 @@
-import collections
+from collections import deque
 
 n = int(input())
-graph = {i: collections.deque() for i in range(n)}
+graph = {i: deque() for i in range(n)}
 
 for _ in range(n):
+    # ref: https://note.nkmk.me/python-multi-variables-values/
     u, k, *v = map(int, input().split())
     for v_ in v:
         graph[u-1].append(v_-1)
 
-seen = [False]*n
-stack = []
-time = 0
-seen_time = [0]*n
-done_time = [0]*n
+stack, time = [], 0
+seen, seen_time, done_time = [False]*n, [0]*n, [0]*n
 
 
 def dfs(i):
@@ -31,13 +29,13 @@ def dfs(i):
             done_time[s] = time
             continue
 
-        t = graph[s].popleft()
-        if seen[t]:
+        next = graph[s].popleft()
+        if seen[next]:
             continue
-        seen[t] = True
-        stack.append(t)
+        seen[next] = True
+        stack.append(next)
         time += 1
-        seen_time[t] = time
+        seen_time[next] = time
 
 
 for i in range(n):
