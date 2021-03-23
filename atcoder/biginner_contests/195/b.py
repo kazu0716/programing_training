@@ -1,13 +1,9 @@
-from itertools import product
-from math import ceil, floor
-
 A, B, W = map(float, input().split())
 
-w = W * 1000
-upper = int(floor(w/A))
-lower = int(ceil(w/B))
+ans = [n for n in range(1, pow(10, 6)+1) if A * n <=
+       W * 1000 and W * 1000 <= B * n]
 
-if upper < lower:
-    print("UNSATISFIABLE")
+if len(ans) > 0:
+    print(min(ans), max(ans))
 else:
-    print(lower, upper)
+    print("UNSATISFIABLE")
