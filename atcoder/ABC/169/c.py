@@ -1,6 +1,4 @@
 from decimal import Decimal
 
-A, B = input().split()
-A, B = Decimal(A), Decimal(B)
-ans = A * B
-print(int(ans))
+A, B = map(Decimal, input().split())
+print(int(A * B))
