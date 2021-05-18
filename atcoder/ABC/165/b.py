@@ -1,5 +1,3 @@
-from math import floor
-
 X = int(input())
 
 c, i = 100, 0
