@@ -1,6 +1,6 @@
-A, B, C = map(int, input().split())
+N, R = map(int, input().split())
 
-if (A == B and B != C) or (B == C and B != A) or (A == C and B != C):
-    print("Yes")
+if N >= 10:
+    print(R)
 else:
-    print("No")
+    print(R+100*(10 - N))

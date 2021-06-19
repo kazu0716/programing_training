@@ -1,18 +1,12 @@
 N = int(input())
-dic = {}
+X = list(map(int, input().split()))
 
-for _ in range(N):
-    s = input()
-    if s in dic:
-        dic[s] += 1
-    else:
-        dic[s] = 1
+ans = pow(100, 100)
 
-s = max(dic.values())
-ans = []
+for p in range(1, 101):
+    s = 0
+    for x in X:
+        s += (x-p)**2
+    ans = min(ans, s)
 
-for k, v in dic.items():
-    if s == v:
-        ans.append(k)
-
-print(*sorted(ans), sep="\n")
+print(ans)

@@ -1,14 +1,14 @@
-N = int(input())
+import sys
 
-cnt1, cnt2 = 0, 0
+sys.setrecursionlimit(pow(10, 9))
 
-for A in map(int, input().split()):
-    if A % 2 == 0:
-        cnt1 += 1
-        if A % 3 == 0 or A % 5 == 0:
-            cnt2 += 1
+N, K = map(int, input().split())
 
-if cnt1 == cnt2:
-    print("APPROVED")
-else:
-    print("DENIED")
+
+def solve(n, k):
+    if n//k:
+        return solve(n//k, k)+str(n % k)
+    return str(n % k)
+
+
+print(len(solve(N, K)))
