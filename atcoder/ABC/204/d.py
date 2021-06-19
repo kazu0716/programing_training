@@ -2,7 +2,6 @@ N = int(input())
 T = list(map(int, input().split()))
 s = sum(T)
 
-
 dp = [[False] * (s + 1) for _ in range(N + 1)]
 dp[0][0] = True
 
