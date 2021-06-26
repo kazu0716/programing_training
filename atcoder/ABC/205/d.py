@@ -6,6 +6,7 @@ sys.setrecursionlimit(pow(10, 9))
 N, Q = map(int, input().split())
 A = list(map(int, input().split()))
 
+
 def solve(k, idx1):
     idx2 = bisect_right(A, k)
     if idx1 < idx2:
