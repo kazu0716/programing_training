@@ -13,12 +13,12 @@ for _ in range(N-1):
 
 def bfs(u):
     queue = deque([u])
-    d = [None] * (N)
+    d = [-1] * N
     d[u] = 0
     while queue:
         v = queue.popleft()
         for i in tree[v]:
-            if d[i] is not None:
+            if d[i] =! -1:
                 continue
             d[i] = d[v] + 1
             queue.append(i)
