@@ -18,7 +18,7 @@ def bfs(u):
     while queue:
         v = queue.popleft()
         for i in tree[v]:
-            if d[i] =! -1:
+            if d[i] != -1:
                 continue
             d[i] = d[v] + 1
             queue.append(i)
