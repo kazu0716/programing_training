@@ -1,10 +1,10 @@
 from heapq import heapify, heappop, heappush
 
 Q = int(input())
-bag = []
-heapify(bag)
-ans = []
+
+bag, ans = [], []
 cnt = 0
+heapify(bag)
 
 for _ in range(Q):
     query = list(map(int, input().split()))
