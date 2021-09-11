@@ -18,8 +18,7 @@ for _ in range(N):
 
 for x in X:
     xset = X[x]
-    for p in combinations(xset, 2):
-        p1, p2 = p[0], p[1]
+    for p1, p2 in combinations(xset, 2):
         yset = Y[p1[1]]
         yset -= set([p1, p2])
         for p3 in yset:
