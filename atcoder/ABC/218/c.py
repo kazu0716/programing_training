@@ -1,54 +1,43 @@
-import numpy as np
-
 N = int(input())
 S, T = [], []
 
-min_xs, max_xs, min_ys, max_ys = 300, -1, 300, -1
-for i in range(N):
-    s = list(input())
-    for j in range(len(s)):
-        if s[j] == "#":
-            S.append([j, i])
-            min_xs = min(min_xs, j)
-            max_xs = max(max_xs, j)
-            min_ys = min(min_ys, i)
-            max_ys = max(max_ys, i)
 
-min_xt, max_xt, min_yt, max_yt = 300, -1, 300, -1
-for i in range(N):
-    t = list(input())
-    for j in range(len(t)):
-        if t[j] == "#":
-            T.append([j, i])
-            min_xt = min(min_xt, j)
-            max_xt = max(max_xt, j)
-            min_yt = min(min_yt, i)
-            max_yt = max(max_yt, i)
+def set_points(l):
+    min_x, max_x, min_y, max_y = 300, -1, 300, -1
+    for i in range(N):
+        s = list(input())
+        for j in range(len(s)):
+            if s[j] == "#":
+                l.append([j, i])
+                min_x = min(min_x, j)
+                max_x = max(max_x, j)
+                min_y = min(min_y, i)
+                max_y = max(max_y, i)
+    return min_x, max_x, min_y, max_y
 
-s_shape = [[0] * (max_xs - min_xs + 1) for _ in range((max_ys - min_ys + 1))]
-for s in S:
-    x, y = s[0], s[1]
-    x -= min_xs
-    y -= min_ys
-    s_shape[y][x] = 1
 
-s_shape = np.array(s_shape)
+def convert(l, min_x, max_x, min_y, max_y):
+    shape = [[0] * (max_x - min_x + 1)
+             for _ in range((max_y - min_y + 1))]
+    for x, y in l:
+        x -= min_x
+        y -= min_y
+        shape[y][x] = 1
+    return shape
 
-t_shape = [[0] * (max_xt - min_xt + 1) for _ in range((max_yt - min_yt + 1))]
-for t in T:
-    x, y = t[0], t[1]
-    x -= min_xt
-    y -= min_yt
-    t_shape[y][x] = 1
 
-t_shape = np.array(t_shape)
+min_xs, max_xs, min_ys, max_ys = set_points(S)
+min_xt, max_xt, min_yt, max_yt = set_points(T)
+
+s = convert(S, min_xs, max_xs, min_ys, max_ys)
+t = convert(T, min_xt, max_xt, min_yt, max_yt)
 
 flag = False
 for _ in range(4):
-    if np.array_equal(s_shape, t_shape):
+    if s == t:
         flag = True
         break
-    s_shape = np.rot90(s_shape)
+    s = list(map(list, zip(*s[::-1])))
 
 if flag:
     print("Yes")
