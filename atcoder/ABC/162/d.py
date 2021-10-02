@@ -22,7 +22,7 @@ for i in range(N-1, -1, -1):
             dp[i][j].add(i)
 
 
-ans = 0
+tmp, ans = 0, 0
 colors = set([0, 1, 2])
 
 for i in range(N-2):
@@ -31,9 +31,9 @@ for i in range(N-2):
         c3 = (colors - set([c1, c2])).pop()
         for j in dp[i][c2]:
             k = 2 * j - i
-            if k not in dp[j][c3]:
-                ans += len(dp[j][c3])
-            else:
-                ans += len(dp[j][c3]) - 1
+            if k < N:
+                if k in dp[j][c3]:
+                    tmp += 1
+            ans += len(dp[j][c3])
 
-print(ans)
+print(ans-tmp)
