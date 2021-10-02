@@ -1,35 +1,32 @@
 N = int(input())
-S = input()
+S = []
 
-dp = [[set([]), set([]), set([])] for _ in range(N)]
+dp = [[set([]) for _ in range(3)] for _ in range(N)]
 
-
-def convert_int(color):
-    if color == "R":
-        return 0
-    elif color == "G":
-        return 1
+for s in input():
+    if s == "R":
+        S.append(0)
+    elif s == "G":
+        S.append(1)
     else:
-        return 2
-
+        S.append(2)
 
 for i in range(N-1, -1, -1):
-    c = convert_int(S[i])
+    c = S[i]
     if i == N-1:
         dp[i][c].add(i)
         continue
     for j in range(3):
+        dp[i][j] = dp[i+1][j].copy()
         if j == c:
-            dp[i][j] = dp[i+1][j].copy()
             dp[i][j].add(i)
-        else:
-            dp[i][j] = dp[i+1][j].copy()
+
 
 ans = 0
 colors = set([0, 1, 2])
 
 for i in range(N-2):
-    c1 = convert_int(S[i])
+    c1 = S[i]
     for c2 in (colors - set([c1])):
         c3 = (colors - set([c1, c2])).pop()
         for j in dp[i][c2]:
