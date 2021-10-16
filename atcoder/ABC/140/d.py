@@ -2,7 +2,7 @@ N, K = map(int, input().split())
 S = list(input())
 
 line = []
-for _ in range(len(S)):
+for _ in range(N):
     s = S.pop()
     if not line:
         line.append(s)
@@ -16,6 +16,10 @@ for _ in range(K):
     for _ in range(2):
         if len(line) > 1:
             line.pop()
+        else:
+            break
+    else:
+        continue
 
 ans = (N-1) - (len(line)-1)
 print(ans)
