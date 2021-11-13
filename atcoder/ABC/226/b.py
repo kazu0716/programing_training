@@ -1,11 +1,10 @@
-from collections import defaultdict, deque
+from collections import defaultdict
 
 N = int(input())
 cnt = defaultdict(set)
 
 for _ in range(N):
-    line = deque(list(map(int, input().split())))
-    length = line.popleft()
+    length, *line = map(int, input().split())
     cnt[length].add(tuple(line))
 
 ans = 0
