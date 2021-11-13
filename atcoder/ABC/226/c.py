@@ -1,19 +1,15 @@
-from collections import deque
-
 N = int(input())
 master = [False]*N
 A, T = [], []
 ans = 0
 
 for _ in range(N):
-    deq = deque(list(map(int, input().split())))
-    t = deq.popleft()
+    t, k, *a = map(int, input().split())
     T.append(t)
-    k = deq.popleft()
     if k == 0:
         A.append([])
     else:
-        A.append(list(deq))
+        A.append(list(a))
 
 ans = 0
 stack = [N-1]
