@@ -42,9 +42,10 @@ for cur in range(N-1, 0, -1):
     for nxt in edge[cur]:
         if nxt <= cur:
             continue
-        if not uf.same(cur, nxt):
-            uf.union(cur, nxt)
-            cnt -= 1
+        if uf.same(cur, nxt):
+            continue
+        uf.union(cur, nxt)
+        cnt -= 1
     ans.append(cnt)
 
 print(*ans[::-1], sep="\n")
