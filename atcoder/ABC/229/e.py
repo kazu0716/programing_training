@@ -28,13 +28,13 @@ class UnionFind(object):
 
 
 N, M = map(int, input().split())
-edge = [set([]) for _ in range(N)]
+edge = [[] for _ in range(N)]
 uf = UnionFind(N)
 
 for _ in range(M):
     A, B = map(int, input().split())
-    edge[A-1].add(B-1)
-    edge[B-1].add(A-1)
+    edge[A-1].append(B-1)
+    edge[B-1].append(A-1)
 
 cnt, ans = 0, [0]
 for cur in range(N-1, 0, -1):
@@ -45,7 +45,6 @@ for cur in range(N-1, 0, -1):
         if not uf.same(cur, nxt):
             uf.union(cur, nxt)
             cnt -= 1
-        edge[nxt].remove(cur)
     ans.append(cnt)
 
 print(*ans[::-1], sep="\n")
