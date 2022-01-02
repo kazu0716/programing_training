@@ -5,21 +5,21 @@ A = [list(map(int, input().split())) for _ in range(N)]
 M = int(input())
 INF = pow(10, 12)
 
-no_conn = [set([]) for _ in range(N)]
+relation = [[True]*N for _ in range(N)]
 for _ in range(M):
     X, Y = map(int, input().split())
-    no_conn[X-1].add(Y-1)
-    no_conn[Y-1].add(X-1)
+    relation[X-1][Y-1] = False
+    relation[Y-1][X-1] = False
 
 ans = INF
 for p in permutations(range(N)):
     flag, cnt = True, 0
     for i in range(N):
-        if (i-1 >= 0 and p[i-1] in no_conn[p[i]]) or (i+1 < N and p[i+1] in no_conn[p[i]]):
+        if i+1 < N and not relation[p[i]][p[i+1]]:
             flag = False
             break
         cnt += A[p[i]][i]
-    if flag and cnt > 0:
+    if flag:
         ans = min(ans, cnt)
 
 if ans == INF:
