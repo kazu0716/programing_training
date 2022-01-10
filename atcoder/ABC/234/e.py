@@ -29,12 +29,12 @@ top = int(X[0])
 comp = [int(X[0]*n), int(str(top+1)*n)]
 if top < 5:
     d = int("".join([str(i) for i in range(top, top+n-1) if i < 10]))
-    if check(d):
+    if check(d) and len(str(d)) == n:
         comp.append(d)
 else:
     for t in (top, top+1):
         d = int("".join([str(i) for i in range(t, t-n, -1) if i >= 0]))
-        if check(d):
+        if check(d) and len(str(d)) == n:
             comp.append(d)
 comp.sort()
 print(comp[bisect_left(comp, XX)])
