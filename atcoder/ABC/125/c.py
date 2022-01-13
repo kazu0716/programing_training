@@ -10,8 +10,7 @@ for i in range(1, N):
     sl.append(gl)
     sr.append(gr)
 
-ans = 0
+ans = max(sl[-2], sr[-2])
 for i in range(N-1):
     ans = max(ans,  gcd(sl[i], sr[N-3-i]))
-
-print(max(ans, sl[-2], sr[-2]))
+print(ans)
