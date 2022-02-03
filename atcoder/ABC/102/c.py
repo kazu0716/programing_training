@@ -10,4 +10,4 @@ b = median(B)
 ans = 0
 for i, a in enumerate(A):
     ans += abs(a-(b+(i+1)))
-print(ans)
+print(int(ans))
