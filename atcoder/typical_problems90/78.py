@@ -13,6 +13,6 @@ for i in range(N):
     j = heappop(edge[i])
     if j < i and not edge[i]:
         ans += 1
-    elif edge[i] and j < i and i < heappop(edge[i]):
+    elif edge[i] and j < i < heappop(edge[i]):
         ans += 1
 print(ans)
