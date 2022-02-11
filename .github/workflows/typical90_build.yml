@@ -1,0 +1,44 @@
+on:
+  push:
+    branch:
+      - main
+    paths:
+      - "atcoder/typical_problems90/**.py"
+
+defaults:
+  run:
+    working-directory: "atcoder/typical_problems90"
+
+jobs:
+  update_README:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install libraries
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run script for updating
+        run: |
+          python builder.py
+
+      - name: Push auto-fixed files
+        run: |
+          git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          if (git diff --shortstat | grep '[0-9]'); then \
+            git add .; \
+            git commit -m "Auto update README in typical90 by github-actions"; \
+            git push origin HEAD:${GITHUB_REF}; \
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

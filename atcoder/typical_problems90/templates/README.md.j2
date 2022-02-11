@@ -28,6 +28,8 @@
 ### My solutions
 
 - continue to solve the problems for now
+- work on `pypy3.6-7.3.0` to use standard libraries
+    - perpahs, some of solutions fails on pypy, because it's recursive function is so slow compared with python3
 
 | No. | Problem | My Solution |
 |:----|:----|:----|

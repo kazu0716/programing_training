@@ -1,3 +1,4 @@
+import logging
 from glob import glob
 from os.path import abspath, basename, dirname
 from re import sub
@@ -8,6 +9,7 @@ from requests import Response, Session
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
+logging.basicConfig(level=logging.INFO)
 cur_dir = dirname(abspath(__file__))
 ses = Session()
 retry = Retry(total=3, backoff_factor=1, status_forcelist=[500, 502, 503, 504])
@@ -20,7 +22,7 @@ class Problems(TypedDict):
     title: str
 
 
-def __gen_urls(n: int) -> tuple:
+def __gen_urls(n: int) -> Tuple[str, str]:
     if n//26 > 1 and n % 26 == 0:
         idx: str = chr(96 + n//26-1)
     elif n // 26 > 0:
@@ -58,14 +60,19 @@ def __builder() -> List[Tuple[int, str, str, str]]:
     return sorted(list(items))
 
 
-def __main() -> None:
+def main() -> None:
+    logging.info("===== begin to update README.md =====")
     env: Environment = Environment(loader=FileSystemLoader(cur_dir+"/templates"))
+    logging.info("===== load template =====")
     template: Template = env.get_template("README.md.j2")
+    logging.info("===== get items for jinja2-template =====")
     items: List[Tuple[int, str, str, str]] = __builder()
+    logging.info("===== create README.md from template =====")
     ret: str = template.render(items=items)
     with open(cur_dir+"/README.md", "w") as f:
         f.write(ret)
+    logging.info("===== finish updating README.md =====")
 
 
 if __name__ == "__main__":
-    __main()
+    main()
