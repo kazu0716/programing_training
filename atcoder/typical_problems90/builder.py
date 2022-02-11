@@ -46,7 +46,7 @@ def __get_problems() -> Dict[str, Problems]:
 
 
 def __builder() -> List[Tuple[int, str, str, str]]:
-    items, problems = [], __get_problems()
+    items, problems = set([]), __get_problems()
     for p in glob(cur_dir+"/*.py"):
         if basename(__file__) in p:
             continue
@@ -54,9 +54,8 @@ def __builder() -> List[Tuple[int, str, str, str]]:
         n: int = int(sub(r"\D", "", path))
         prob_id, url = __gen_urls(n)
         title: str = problems[prob_id]["title"]
-        items.append((n, title, url, path))
-    items.sort()
-    return items
+        items.add((n, title, url, path))
+    return sorted(list(items))
 
 
 def __main() -> None:

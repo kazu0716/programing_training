@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-- my solutions of [ Typical Competitive Problem 90](https://atcoder.jp/contests/typical90) (only Japanese)
+- my solutions of [ Typical Competitive Problem 90](https://atcoder.jp/contests/typical90)
 - confirm to solve the problem by [kazu0716](https://atcoder.jp/users/kazu_0716)
  
 ## Problems
@@ -12,6 +12,8 @@
 ### Difficulties
 
 - difficulty of problem compared with [ABC contents](https://atcoder.jp/contests/archive?ratedType=1&category=0&keyword=)
+  - [Atcoder](https://atcoder.jp/home) is one of the popular competitive programing contests
+  - [Colors in Atcoder](https://chokudai.hatenablog.com/entry/2019/02/11/155904)
 
 |start|AtCoder Problems Difficulty|convert ABC level(about)|
 |:----|:----|:----|
