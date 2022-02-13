@@ -72,8 +72,7 @@ class LinkedList:
         """
         if not self.head:
             return False
-        slow: ListNode = self.head
-        fast: Optional[ListNode] = self.head.next if self.head else None
+        slow = fast = self.head
         step: int = 2
         while slow != fast:
             if not slow or not fast:
@@ -88,8 +87,8 @@ class LinkedList:
 
 s = Solution()
 l = LinkedList()
-test = [3, 2, 0, -4]
+test = [-1, -7, 7, -4, 19, 6, -9, -5, -2, -5]
 for t in test:
     l.add(t)
-l.create_loop(1)
+l.create_loop(9)
 print(l.is_loop())
