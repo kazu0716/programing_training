@@ -7,7 +7,6 @@ class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         cnt = Counter(nums)
         ans: List[Tuple[int, int]] = []
-        print(cnt)
         for key in cnt:
             if len(ans) == k:
                 v, _k = heappop(ans)
