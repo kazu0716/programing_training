@@ -1,4 +1,5 @@
 import math
+from audioop import reverse
 from bisect import bisect_left, bisect_right, insort
 from sys import exit
 from typing import Generic, Iterable, Iterator, List, TypeVar, Union
@@ -151,10 +152,9 @@ C = list(map(int, input().split()))
 D = list(map(int, input().split()))
 
 items = [(A[i], 0, B[i]) for i in range(N)] + [(C[i], 1, D[i]) for i in range(M)]
-items.sort()
+items.sort(reverse=True)
 larger_boxes = SortedMultiset()
-for _ in range(len(items)):
-    _, is_box, width = items.pop()
+for _, is_box, width in items:
     if bool(is_box):
         larger_boxes.add(width)
     else:
