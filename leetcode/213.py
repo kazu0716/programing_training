@@ -3,16 +3,16 @@ from typing import List
 
 class Solution:
     def rob(self, nums: List[int]) -> int:
+
+        def solve(nums: List[int]) -> int:
+            pre = cur = 0
+            for num in nums:
+                pre, cur = cur, max(pre + num, cur)
+            return cur
+
         if len(nums) == 1:
             return nums[0]
-        pre1 = cur1 = 0
-        pre2 = cur2 = 0
-        for i, num in enumerate(nums):
-            if i < len(nums)-1:
-                pre1, cur1 = cur1, max(pre1 + num, cur1)
-            if i > 0:
-                pre2, cur2 = cur2, max(pre2 + num, cur2)
-        return max(cur1, cur2)
+        return max(solve(nums[1:]), solve(nums[:-1]))
 
 
 if __name__ == "__main__":
