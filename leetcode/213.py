@@ -1,7 +1,5 @@
 from typing import List
 
-from black import re
-
 
 class Solution:
     def rob(self, nums: List[int]) -> int:
