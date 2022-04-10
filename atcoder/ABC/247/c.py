@@ -1,14 +1,18 @@
+from functools import lru_cache
 from sys import setrecursionlimit
 
+import pypyjit
+
+pypyjit.set_param('max_unroll_recursion=-1')
 setrecursionlimit(pow(10, 6))
 
 
-def generate_s(n):
+@lru_cache(maxsize=1000)
+def solve(n):
     if n == 1:
-        return 1
-    return [generate_s(n-1), n, generate_s(n-1)]
+        return [1]
+    return solve(n-1) + [n] + solve(n-1)
 
 
 N = int(input())
-ans = str(generate_s(N)).replace("[", "").replace("]", "").replace(",", "")
-print(ans)
+print(*solve(N))
