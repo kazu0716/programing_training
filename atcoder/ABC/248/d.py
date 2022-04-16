@@ -145,17 +145,14 @@ class SortedSet(Generic[T]):
 
 N = int(input())
 A = list(map(int, input().split()))
-counter = defaultdict(SortedSet)
+sorted_set_dict = defaultdict(SortedSet)
 for i, a in enumerate(A):
-    counter[a].add(i+1)
-
+    sorted_set_dict[a].add(i+1)
 
 Q = int(input())
 ans = []
 for _ in range(Q):
     L, R, X = map(int, input().split())
-    sorted_set = counter[X]
-    r_idx = sorted_set.index_right(R)
-    r_idx = len(sorted_set) if r_idx is None else r_idx
-    ans.append(r_idx - sorted_set.index(L))
+    r_idx = sorted_set_dict[X].index_right(R)
+    ans.append((len(sorted_set_dict[X]) if r_idx is None else r_idx) - sorted_set_dict[X].index(L))
 print(*ans, sep="\n")
