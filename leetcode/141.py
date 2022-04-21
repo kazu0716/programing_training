@@ -11,19 +11,18 @@ class ListNode:
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        """
-        Use hash table
-
-        Time complexity: O(n)
-        Auxiliary Space: O(n)
-        """
-        cur, s = head, set([])
-        while cur:
-            if cur in s:
-                return True
-            s.add(cur)
-            cur = cur.next
-        return False
+        if head is None or head.next is None:
+            return False
+        slow, fast = head, head.next
+        while slow != fast:
+            if slow.next is None:
+                return False
+            slow = slow.next
+            for _ in range(2):
+                if fast.next is None:
+                    return False
+                fast = fast.next
+        return True
 
 
 class LinkedList:
@@ -63,32 +62,14 @@ class LinkedList:
             print(cur.val)
             cur = cur.next
 
-    def is_loop(self) -> bool:
-        """
-        Use Floyd’s Cycle-Finding Algorithm
-
-        Time complexity: O(n)
-        Auxiliary Space: O(1)
-        """
-        if not self.head:
-            return False
-        slow = fast = self.head
-        step: int = 2
-        while slow != fast:
-            if not slow or not fast:
-                return False
-            slow = slow.next
-            for _ in range(step):
-                fast = fast.next
-                if not fast:
-                    return False
-        return True
+    def get_head(self) -> Optional[ListNode]:
+        return self.head
 
 
-s = Solution()
+sol = Solution()
 l = LinkedList()
-test = [-1, -7, 7, -4, 19, 6, -9, -5, -2, -5]
+test = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 for t in test:
     l.add(t)
 l.create_loop(9)
-print(l.is_loop())
+print(sol.hasCycle(l.get_head()))
