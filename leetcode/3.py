@@ -1,16 +1,17 @@
-from collections import deque
-
-
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        start = 0
-        ans, cnt = 0, 1
-        dic = {}
-        for i in range(len(s)):
-            ch = s[i]
-            if ch in dic:
-                start = max(start, dic[ch] + 1)
-            dic[ch] = i
-            cnt = i - start + 1
-            ans = max(cnt, ans)
-        return ans
+        r, sub = 0, set()
+        max_length = 0
+        for l in range(len(s)):
+            while r < len(s) and s[r] not in sub:
+                sub.add(s[r])
+                r += 1
+            max_length = max(max_length, r - l)
+            sub.remove(s[l])
+        return max_length
+
+
+if __name__ == "__main__":
+    sol = Solution()
+    s = "abcabcbb"
+    print(sol.lengthOfLongestSubstring(s))
