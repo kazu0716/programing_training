@@ -1,19 +1,24 @@
+from collections import deque
 from typing import List
 
 
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        perms = [[nums[i]] for i in range(len(nums))]
-        for _ in range(len(nums) - 1):
-            tmp = []
-            while perms:
-                perm1 = perms.pop()
-                for num in set(nums) ^ set(perm1):
-                    perm2 = perm1.copy()
-                    perm2.append(num)
-                    tmp.append(perm2)
-            perms = tmp
-        return perms
+        if len(nums) == 1:
+            return [nums]
+        queue, perm = deque([[num] for num in nums]), []
+        while queue:
+            cur = queue.popleft()
+            for num in nums:
+                if num in cur:
+                    continue
+                nxt = cur.copy()
+                nxt.append(num)
+                if len(nxt) == len(nums):
+                    perm.append(nxt)
+                    continue
+                queue.append(nxt)
+        return perm
 
 
 if __name__ == "__main__":
