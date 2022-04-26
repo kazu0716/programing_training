@@ -1,19 +1,14 @@
-from bisect import bisect_left
-from collections import defaultdict
-
-
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
-        pos = defaultdict(list)
-        for i, tt in enumerate(t):
-            pos[tt].append(i)
-        pre = -1
-        for ss in s:
-            idx = bisect_left(pos[ss], pre + 1)
-            if idx >= len(pos[ss]) or pre >= pos[ss][idx]:
-                return False
-            pre = pos[ss][idx]
-        return True
+        if len(s) == 0:
+            return True
+        cur = 0
+        for tt in t:
+            if s[cur] == tt:
+                cur += 1
+            if cur >= len(s):
+                return True
+        return False
 
 
 if __name__ == "__main__":
