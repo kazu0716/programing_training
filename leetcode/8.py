@@ -13,11 +13,11 @@ class Solution:
                 break
         if digits == "" or digits == "+" or digits == "-":
             return 0
-        num = int(digits)
-        if num > pow(2, 31) - 1:
-            return pow(2, 31) - 1
-        if num < -pow(2, 31):
-            return -pow(2, 31)
+        num, ma, mi = int(digits), pow(2, 31) - 1, -pow(2, 31)
+        if num > ma:
+            return ma
+        if num < mi:
+            return mi
         return num
 
 
