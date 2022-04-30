@@ -1,15 +1,16 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        dp = [0] * (n+1)
-        dp[0] = 1
-        for i in range(n):
-            dp[i+1] += dp[i]
-            if i+2 <= n:
-                dp[i+2] += dp[i]
-        return dp[-1]
+        if n == 1:
+            return 1
+        if n == 2:
+            return 2
+        pos1, pos2 = 1, 2
+        for _ in range(3, n+1):
+            pos1, pos2 = pos2, pos1 + pos2
+        return pos2
 
 
 if __name__ == "__main__":
     sol = Solution()
-    n = 40
+    n = 3
     print(sol.climbStairs(n))
