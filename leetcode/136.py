@@ -1,15 +1,10 @@
-from collections import defaultdict
+from functools import reduce
 from typing import List
 
 
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        cnt = defaultdict(int)
-        for num in nums:
-            cnt[num] += 1
-            if cnt[num] >= 2:
-                del cnt[num]
-        return tuple(cnt.keys())[0]
+        return reduce(lambda x, y: x ^ y, nums)
 
 
 if __name__ == "__main__":
