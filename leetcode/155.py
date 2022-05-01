@@ -1,31 +1,22 @@
-from collections import defaultdict
-from heapq import heappop, heappush
-
-
 class MinStack:
 
     def __init__(self):
         self.stack = []
-        self.dict = defaultdict(int)
-        self.heap = []
 
     def push(self, val: int) -> None:
-        self.stack.append(val)
-        self.dict[val] += 1
-        heappush(self.heap, val)
+        if not self.stack:
+            self.stack.append((val, val))
+        else:
+            self.stack.append((val, min(val, self.stack[-1][1])))
 
     def pop(self) -> None:
-        self.dict[self.stack.pop()] -= 1
+        self.stack.pop()
 
     def top(self) -> int:
-        return self.stack[-1]
+        return self.stack[-1][0]
 
     def getMin(self) -> int:
-        mi = heappop(self.heap)
-        while self.dict[mi] == 0:
-            mi = heappop(self.heap)
-        heappush(self.heap, mi)
-        return mi
+        return self.stack[-1][1]
 
 
 if __name__ == "__main__":
