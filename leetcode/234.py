@@ -10,13 +10,19 @@ class ListNode:
 
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        array_list = []
-        while head:
-            array_list.append(head.val)
-            head = head.next
-        for i in range(len(array_list)//2+1):
-            if array_list[i] != array_list[len(array_list)-1-i]:
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        tail = None
+        while slow:
+            nxt = slow.next
+            tail, slow.next = slow, tail
+            slow = nxt
+        while head and tail:
+            if head.val != tail.val:
                 return False
+            head, tail = head.next, tail.next
         return True
 
 
@@ -32,5 +38,5 @@ def list_to_linked_list(l: list) -> Optional[ListNode]:
 
 if __name__ == "__main__":
     sol = Solution()
-    head = [1, 2, 2, 1]
+    head = [1, 1, 1, 2, 2, 1, 1, 1]
     print(sol.isPalindrome(list_to_linked_list(head)))
