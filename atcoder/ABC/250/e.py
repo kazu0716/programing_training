@@ -27,8 +27,5 @@ Q = int(input())
 ans = []
 for _ in range(Q):
     x, y = map(int, input().split())
-    if len_A[x-1] == len_B[y-1] and sum_A[x-1] == sum_B[y-1]:
-        ans.append("Yes")
-    else:
-        ans.append("No")
+    ans.append("Yes" if len_A[x-1] == len_B[y-1] and sum_A[x-1] == sum_B[y-1] else "No")
 print(*ans, sep="\n")
