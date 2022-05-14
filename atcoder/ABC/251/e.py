@@ -9,4 +9,4 @@ for i in range(1, N):
     dp1[i][1] = min(dp1[i][1], dp1[i-1][0])
     dp2[i][0] = min(dp2[i][0], dp2[i-1][0]+A[i], dp2[i-1][1]+A[i]) if i < N-1 else min(dp2[i][0], dp2[i-1][0], dp2[i-1][1])
     dp2[i][1] = min(dp2[i][1], dp2[i-1][0])
-print(min(dp1[-1][0], dp1[-1][1], dp2[-1][0]))
+print(min(dp1[-1]+[dp2[-1][0]]))
