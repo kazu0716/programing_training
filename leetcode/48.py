@@ -1,4 +1,3 @@
-from copy import deepcopy
 from typing import List
 
 
@@ -7,10 +6,14 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        origin = deepcopy(matrix)
         for i in range(len(matrix)):
-            for j in range(len(matrix[i])):
-                matrix[j][len(matrix[i])-i-1] = origin[i][j]
+            # NOTE: transpose
+            for j in range(i+1, len(matrix[i])):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+            # NOTE: reflect
+            for k in range(len(matrix[i])//2):
+                matrix[i][k], matrix[i][len(matrix[i])-k-1] = matrix[i][len(matrix[i])-k-1], matrix[i][k]
+        print(matrix)
 
 
 if __name__ == "__main__":
