@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 N = int(input())
-cnt, ans = defaultdict(int), 0
+cnt = defaultdict(int)
 for i in range(1, N+1):
     j = 2
     while i > 1 and i >= j*j:
