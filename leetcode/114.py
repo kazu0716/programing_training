@@ -17,27 +17,20 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
 
+        Morris Traversal
+        ref: https://leetcode.com/problems/flatten-binary-tree-to-linked-list/discuss/1207642/JS-Python-Java-C%2B%2B-or-Simple-O(1)-Space-and-Recursive-Solutions-w-Explanation
+
         Time complexity: O(n)
-        Auxiliary Space: O(n)
+        Auxiliary Space: O(1)
         """
-        if root is None:
-            return
-
-        nodes = [root]
-
-        def dfs(cur):
-            nonlocal nodes
+        cur = root
+        while cur:
             if cur.left:
-                nodes.append(cur.left)
-                dfs(cur.left)
-            if cur.right:
-                nodes.append(cur.right)
-                dfs(cur.right)
-
-        dfs(root)
-        for i in range(len(nodes)-1):
-            nodes[i].left = None
-            nodes[i].right = nodes[i+1]
+                nxt = cur.left
+                while nxt.right:
+                    nxt = nxt.right
+                cur.left, cur.right, nxt.right = None, cur.left, cur.right
+            cur = cur.right
 
 
 def list_to_binary_tree(tree_list: list) -> Optional[TreeNode]:
