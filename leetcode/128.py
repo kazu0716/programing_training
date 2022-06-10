@@ -4,6 +4,10 @@ from typing import List
 
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
+        """
+        Time complexity : O(n)
+        Space complexity : O(n)
+        """
         num_set, finds, ans = set(nums), defaultdict(bool), 0
         for num in nums:
             if finds[num]:
