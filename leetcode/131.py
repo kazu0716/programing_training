@@ -1,5 +1,5 @@
 from sys import setrecursionlimit
-from typing import List, Optional
+from typing import List
 
 setrecursionlimit(pow(10, 6))
 
