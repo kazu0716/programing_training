@@ -1,4 +1,7 @@
+from sys import setrecursionlimit
 from typing import List
+
+setrecursionlimit(pow(10, 6))
 
 
 class Solution:
