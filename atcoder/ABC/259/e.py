@@ -1,30 +1,21 @@
 from collections import defaultdict
 
 N = int(input())
-lcm, nums, cnt, pe = defaultdict(int), [], defaultdict(int), defaultdict(list)
+lcms, cnt, p_max_e = [], defaultdict(int), defaultdict(int)
 for _ in range(N):
-    m = int(input())
-    tmp = []
+    m, lcm = int(input()), []
     for _ in range(m):
         p, e = map(int, input().split())
         cnt[(p, e)] += 1
-        tmp.append((p, e))
-        pe[p].append(e)
-        if p not in lcm or (p in lcm and lcm[p] < e):
-            lcm[p] = e
-    nums.append(tmp)
-for p in pe:
-    pe[p].sort()
+        p_max_e[p] = max(p_max_e[p], e)
+        lcm.append((p, e))
+    lcms.append(lcm)
 ans = set()
-for num in nums:
-    tmp = set()
-    for p, e in num:
-        if cnt[(p, e)] == 1 and lcm[p] == e:
-            if len(pe[p]) > 1:
-                e2 = pe[p][-2]
-                tmp.add((p, e-e2))
-            else:
-                tmp.add((p, e))
-    if len(tmp) > 0:
-        ans.add(frozenset(tmp))
+for lcm in lcms:
+    s = set()
+    for p, e in lcm:
+        if cnt[(p, e)] == 1 and p_max_e[p] == e:
+            s.add((p, e))
+    if s:
+        ans.add(frozenset(s))
 print(len(ans) if len(ans) == N else len(ans)+1)
