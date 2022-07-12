@@ -1,9 +1,10 @@
 from collections import deque
-from heapq import heappop, heappush
+from sys import setrecursionlimit
 from typing import List, Optional
 
+setrecursionlimit(pow(10, 9))
 
-# Definition for a binary tree node.
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -13,22 +14,30 @@ class TreeNode:
 
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        if root is None:
-            return 0
-        nums = [root.val]
-
+        """
+        Time complexity : O(N)
+        Space complexity : O(N)
+        """
         def dfs(node: TreeNode):
-            nonlocal nums
-            if node.left is not None:
-                nums.append(node.left.val)
-                dfs(node.left)
-            if node.right is not None:
-                nums.append(node.right.val)
-                dfs(node.right)
+            return dfs(node.left) + [node.val] + dfs(node.right) if node else []
+        return dfs(root)[k-1]
 
-        dfs(root)
-        nums.sort()
-        return nums[k-1]
+    def kthSmallest2(self, root: Optional[TreeNode], k: int) -> int:
+        """
+        Time complexity : O(log N + k)
+        Space complexity : O(log N)
+        """
+        stack = []
+        while True:
+            while root:
+                stack.append(root)
+                root = root.left
+            # NOTE: root equals minium value node
+            root = stack.pop()
+            k -= 1
+            if k == 0:
+                return root.val
+            root = root.right
 
 
 def convert_list_to_bst(nums: Optional[List[Optional[int]]]) -> Optional[TreeNode]:
@@ -55,8 +64,7 @@ def convert_list_to_bst(nums: Optional[List[Optional[int]]]) -> Optional[TreeNod
 
 if __name__ == "__main__":
     sol = Solution()
-    root = [3, 1, 4, None, 2]
-    # root = [1]
-    k = 1
+    root = [5, 3, 6, 2, 4, None, None, 1]
+    k = 3
     head = convert_list_to_bst(root)
-    print(sol.kthSmallest(head, k))
+    print(sol.kthSmallest2(head, k))
