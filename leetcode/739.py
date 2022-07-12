@@ -1,15 +1,18 @@
-from heapq import heappop, heappush
 from typing import List
 
 
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        ans, heap = [0]*len(temperatures), []
+        """
+        Time complexity : O(N)
+        Space complexity : O(N)
+        """
+        ans, stack = [0]*len(temperatures), []
         for i, t in enumerate(temperatures):
-            while heap and t > heap[0][0]:
-                _, j = heappop(heap)
+            while stack and t > stack[-1][0]:
+                _, j = stack.pop()
                 ans[j] = i-j
-            heappush(heap, (t, i))
+            stack.append((t, i))
         return ans
 
 
