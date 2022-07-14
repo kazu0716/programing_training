@@ -3,6 +3,10 @@ from typing import List
 
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
+        """
+        Time complexity : O(NlogN)
+        Space complexity : O(N)
+        """
         return sorted(nums, reverse=True)[k-1]
 
 
