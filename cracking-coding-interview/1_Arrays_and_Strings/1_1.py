@@ -33,7 +33,7 @@ class Solutions:
         """
         Use sort 
 
-        Time complexity: O(N^2)
+        Time complexity: O(NlogN)
         Memory Space: O(N)
         """
         string_list = sorted(string)
