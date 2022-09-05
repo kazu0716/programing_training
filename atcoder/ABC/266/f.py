@@ -1,4 +1,3 @@
-from itertools import cycle
 from sys import setrecursionlimit
 
 from pypyjit import set_param
