@@ -11,10 +11,10 @@ for p in combinations_with_replacement(range(1, 16-length), N-1):
                 spaces.add(pp)
 for s in permutations(S):
     for space in spaces:
-        txt = s[0]
+        user_name = s[0]
         for i in range(1, N):
-            txt += "_" * space[i-1] + s[i]
-        if txt not in T and len(txt) >= 3 and len(txt) <= 16:
-            print(txt)
+            user_name += "_" * space[i-1] + s[i]
+        if user_name not in T and len(user_name) >= 3:
+            print(user_name)
             exit()
 print(-1)
