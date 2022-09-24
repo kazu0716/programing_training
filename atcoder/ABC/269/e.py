@@ -1,28 +1,18 @@
+def get_non_rook_pos(axis: str) -> int:
+    T, low, high = 0, 1, N
+    while T != -1 and high - low > 0:
+        mid = (low + high) // 2
+        if axis == "X":
+            print("?", low, mid, 1, N)
+        else:
+            print("?", 1, N, low, mid)
+        T = int(input())
+        if T <= mid - low:
+            high = mid
+        else:
+            low = mid + 1
+    return low
+
+
 N = int(input())
-T = 0
-low_x, high_x = 0, N
-low_y, high_y = 0, N
-cnt = 0
-while T != -1:
-    if cnt % 2 == 0:
-        mid = (low_x+high_x)//2
-        print("?", low_x, mid, low_y, high_y)
-        T = int(input())
-        if T <= N - T:
-            high_x = mid
-            N = T
-        else:
-            low_x = mid
-            N = max(0, N-T)
-    else:
-        mid = (low_y+high_y)//2
-        print("?", low_x, high_x, low_y, mid)
-        T = int(input())
-        if T <= N - T:
-            high_y = mid
-            N = T
-        else:
-            low_y = mid
-            N = max(0, N-T)
-    if N == 0:
-        print("!", min(low_x, high_x), min(low_y, high_y))
+print("!", get_non_rook_pos("X"), get_non_rook_pos("Y"))
