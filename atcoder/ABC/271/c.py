@@ -28,5 +28,4 @@ while keys:
         keys.pop()
     if cnt > 0:
         cnt -= 1
-    continue
 print(ans)
