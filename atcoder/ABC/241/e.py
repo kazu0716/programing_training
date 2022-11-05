@@ -1,14 +1,13 @@
 N, K = map(int, input().split())
 A = list(map(int, input().split()))
+# NOTE: find a loop
 x, x_set = 0, set()
 while x % N not in x_set:
     x_set.add(x % N)
     x += A[x % N]
 x_list = list(x_set)
 since = x_list.index(x % N)
-loop = len(x_list) - since
-loop_num = (K - since) // loop
-
+loop_num = (K - since) // (len(x_list) - since)
 i, ans = 0, 0
 while K > 0 and i < since:
     ans += A[x_list[i]]
