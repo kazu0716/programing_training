@@ -2,15 +2,15 @@ from math import sqrt
 
 
 def sorted_prime_list(limit):
-    primes = []
-    is_prime = [True] * (limit + 1)
-    is_prime[0] = False
-    is_prime[1] = False
-    for p in range(0, limit + 1):
+    limit += 1
+    primes, is_prime = [], [True] * limit
+    for i in range(2 ** 2, limit, 2):
+        is_prime[i] = False
+    for p in range(3, limit, 2):
         if not is_prime[p]:
             continue
         primes.append(p)
-        for i in range(p * p, limit + 1, p):
+        for i in range(p * p, limit, p):
             is_prime[i] = False
     return primes
 
