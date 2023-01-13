@@ -19,15 +19,13 @@ class UnionFind():
         self.parents[x] += self.parents[y]
         self.parents[y] = x
 
+    def connected_component_size(self):
+        return len([p for p in self.parents if p < 0])
+
 
 N, M = map(int, input().split())
 uf = UnionFind(N)
 for _ in range(M):
     u, v = map(int, input().split())
     uf.union(u - 1, v - 1)
-ans = set()
-for i in range(N):
-    p = uf.find(i)
-    if p not in ans:
-        ans.add(p)
-print(len(ans))
+print(uf.connected_component_size())
