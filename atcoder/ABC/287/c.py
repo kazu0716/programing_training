@@ -22,19 +22,25 @@ class UnionFind():
     def same(self, x, y):
         return self.find(x) == self.find(y)
 
+    def roots(self):
+        return [i for i, x in enumerate(self.parents) if x < 0]
+
 
 N, M = map(int, input().split())
-uf = UnionFind(N)
-ans = "Yes"
-for _ in range(M):
-    u, v = map(int, input().split())
+uf, cnt = UnionFind(N), [0] * N
+has_cycle = False
+edges = [tuple(map(int, input().split())) for _ in range(M)]
+for u, v in edges:
+    cnt[u - 1] += 1
+    cnt[v - 1] += 1
+    if cnt[u - 1] > 2 or cnt[v - 1] > 2:
+        print("No")
+        exit()
     if uf.same(u - 1, v - 1):
-        ans = "No"
-        continue
+        print("No")
+        exit()
     uf.union(u - 1, v - 1)
-parent = uf.find(0)
-for i in range(1, N):
-    if parent != uf.find(i):
-        ans = "No"
-        break
-print(ans)
+if len(uf.roots()) > 1:
+    print("No")
+    exit()
+print("Yes")
