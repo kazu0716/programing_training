@@ -14,8 +14,6 @@ for _ in range(Q):
             card[i].append(j)
             card_set[i].add(j)
     elif query[0] == 2:
-        box[i].sort()
-        print(*box[i])
+        print(*sorted(box[i]))
     else:
-        card[i].sort()
-        print(*card[i])
+        print(*sorted(card[i]))
