@@ -13,5 +13,4 @@ for i, a in enumerate(A):
             if (i + 1) * (j + 1) * (k + 1) > K:
                 break
             ans.append(a + b + c)
-print(len(ans))
 print(*sorted(ans, reverse=True)[:K], sep="\n")
