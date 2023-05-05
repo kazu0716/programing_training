@@ -1,18 +1,17 @@
-from heapq import heappop, heappush, heappushpop
-from typing import List
-
 X, Y, Z, K = map(int, input().split())
-A = list(map(int, input().split()))
-B = list(map(int, input().split()))
+A = sorted(list(map(int, input().split())), reverse=True)
+B = sorted(list(map(int, input().split())), reverse=True)
 C = sorted(list(map(int, input().split())), reverse=True)
-AB = [a + b for a in A for b in B]
-heap: List[int] = []
-for ab in AB:
-    for c in C:
-        if len(heap) < K:
-            heappush(heap, ab + c)
-            continue
-        if heap[0] > ab + c:
+ans = []
+for i, a in enumerate(A):
+    if i + 1 > K:
+        break
+    for j, b in enumerate(B):
+        if (i + 1) * (j + 1) > K:
             break
-        heappushpop(heap, ab + c)
-print(*[heappop(heap) for _ in range(K)][::-1], sep="\n")
+        for k, c in enumerate(C):
+            if (i + 1) * (j + 1) * (k + 1) > K:
+                break
+            ans.append(a + b + c)
+print(len(ans))
+print(*sorted(ans, reverse=True)[:K], sep="\n")
