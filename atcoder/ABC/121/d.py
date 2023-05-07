@@ -1,7 +1,6 @@
-def f(a, b):
-    cnt = b - a + 1
-    return cnt // 2 % 2 if cnt % 2 == 0 else (cnt // 2 % 2) ^ b
+def sum_xor(x):
+    return (x + 1) // 2 % 2 if (x + 1) % 2 == 0 else ((x + 1) // 2 % 2) ^ x
 
 
 A, B = map(int, input().split())
-print(f(0, A - 1) ^ f(0, B))
+print(sum_xor(A - 1) ^ sum_xor(B))
