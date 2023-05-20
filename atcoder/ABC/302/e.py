@@ -1,22 +1,24 @@
 N, Q = map(int, input().split())
 graph = [set() for _ in range(N)]
-connected_set = set()
 ans = []
 for _ in range(Q):
-    query = input().split()
-    if query[0] == "1":
-        u, v = map(lambda x: int(x) - 1, query[1:])
+    query = list(map(int, input().split()))
+    if query[0] == 1:
+        u, v = query[1] - 1, query[2] - 1
+        if not graph[u]:
+            N -= 1
         graph[u].add(v)
+        if not graph[v]:
+            N -= 1
         graph[v].add(u)
-        connected_set.add(u)
-        connected_set.add(v)
     else:
-        v = int(query[1]) - 1
+        v = query[1] - 1
         for u in graph[v]:
             graph[u].remove(v)
             if not graph[u]:
-                connected_set.remove(u)
-        connected_set.discard(v)
+                N += 1
+        if graph[v]:
+            N += 1
         graph[v] = set()
-    ans.append(N - len(connected_set))
+    ans.append(N)
 print(*ans, sep="\n")
