@@ -15,13 +15,9 @@ for i, s in enumerate(S):
         dp[i + 1][f"{s}{A[i]}"] += 1
     elif s == "E":
         for m in m_key:
-            if m not in dp[i]:
-                continue
             dp[i + 1][f"{m}{s}{A[i]}"] += dp[i][m]
     else:
         for me in me_key:
-            if me not in dp[i]:
-                continue
             dp[i + 1][f"{me}{s}{A[i]}"] += dp[i][me]
 ans = 0
 p = compile(r"\d+")
