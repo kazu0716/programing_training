@@ -28,10 +28,12 @@ for i in range(N - 1):
     for j, d in enumerate(map(int, input().split())):
         D[i][j + i + 1] = D[j + i + 1][i] = d
 ans = 0
+# NOTE: When N is even, all nodes are used
 if N % 2 == 0:
     visited = [False] * N
     dfs(visited, 0)
     exit(print(ans))
+# NOTE: When N is odd, one node is not used
 for i in range(N):
     visited = [False] * N
     visited[i] = True
