@@ -13,11 +13,11 @@ right[pre_a_j] -= 1
 for j in range(1, N - 1):
     # NOTE: move right value to center
     right[A[j]] -= 1
-    # NOTE: update cnt
+    # NOTE: update cnt by pre_a_j and A[j]
     for key in (pre_a_j, A[j]):
-        diff = left[key] * right[key]
-        sum_diff += diff - cnt[key]
-        cnt[key] = diff
+        comb_num = left[key] * right[key]
+        sum_diff += comb_num - cnt[key]
+        cnt[key] = comb_num
     ans += sum_diff - cnt[A[j]]
     # NOTE: move center value to left
     left[A[j]] += 1
