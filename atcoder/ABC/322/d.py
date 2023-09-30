@@ -31,10 +31,9 @@ def get_field(i: int, j: int, field: List[List[str]], graph: List[List[str]]) ->
     for k in range(len(graph)):
         for _l in range(len(graph[0])):
             h, w = i + k, j + _l
-            if 0 <= h < H and 0 <= w < W and not (field[h][w] == graph[k][_l] == "#"):
-                field[h][w] = "." if field[h][w] == graph[k][_l] == "." else "#"
-            else:
+            if not (0 <= h < H and 0 <= w < W) or field[h][w] == graph[k][_l] == "#":
                 return None
+            field[h][w] = "." if field[h][w] == graph[k][_l] == "." else "#"
     return field
 
 
