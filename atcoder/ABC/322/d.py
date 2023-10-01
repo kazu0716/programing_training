@@ -20,9 +20,8 @@ def trim_graph(p: List[List[str]]) -> List[List[str]]:
             continue
         row = []
         for j in range(W):
-            if j in pop_w_set:
-                continue
-            row.append(p[i][j])
+            if j not in pop_w_set:
+                row.append(p[i][j])
         ret.append(row)
     return ret
 
