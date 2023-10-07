@@ -12,10 +12,13 @@ ans = 0
 for i in range(X + 1):
     if i not in dp:
         continue
+    ret = dp[i] * inv_mod % MOD
     if i + first_song >= X + 0.5:
-        ans = (ans + dp[i] * inv_mod) % MOD
+        ans += ret
+        ans %= MOD
     for t in T:
         if i + t > X:
             break
-        dp[i + t] = (dp[i + t] + dp[i] * inv_mod) % MOD
+        dp[i + t] += ret
+        dp[i + t] %= MOD
 print(ans)
