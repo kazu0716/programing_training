@@ -8,7 +8,7 @@ cur[0] = 0.0
 for i in range(N):
     for j in range(N + 1):
         if cur[j] == -INF:
-            continue
+            break
         nxt[j] = max(nxt[j], cur[j])
         nxt[j + 1] = max(nxt[j + 1], 0.9 * cur[j] + P[i])
     cur, nxt = nxt.copy(), [-INF] * (N + 1)
