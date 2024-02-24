@@ -19,9 +19,9 @@ dep_times[-1] = INF
 heap: List[Tuple[int, int]] = [(-dep_times[-1], N - 1)]
 while heap:
     arrival_time, cur = heappop(heap)
-    last_dep_time = -arrival_time - c
     for nxt in graph[cur]:
         for l, d, k, c in graph[cur][nxt]:
+            last_dep_time = -(arrival_time + c)
             # NOTE: there is no train at the time.
             if last_dep_time < l:
                 continue
