@@ -1,14 +1,25 @@
+# ref: https://leetcode.com/problems/majority-element/?envType=study-plan-v2&envId=top-interview-150
 from typing import List
 
 
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        cnt, candidate = 0, None
+        """
+        Boyer–Moore majority vote algorithm
+        ref: https://qiita.com/tatmius/items/37707bce1ef079616c93
+
+        Time Complexity: O(N)
+        Space Complexity: O(1)
+        """
+        candidate, cnt = 0 ,0
         for num in nums:
-            if cnt == 0:
-                candidate = num
-            cnt += 1 if candidate == num else -1
+            if cnt != 0:
+                cnt += 1 if candidate == num else -1
+                continue
+            candidate = num
+            cnt += 1
         return candidate
+                
 
 
 if __name__ == "__main__":
